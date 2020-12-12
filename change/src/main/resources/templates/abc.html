@@ -1,0 +1,50 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Hello Thymeleaf</title>
+    </head>
+    <body>
+        <h1 th:text="${id}"></h1>
+		<h1 th:text="${pass}"></h1>        
+    </body>
+    
+<form th:action="@{/getname}" method ="GET">
+	<table>
+		<tr>
+			<td><label for="username">User:</label></td>
+			<td><input type="text" id = "username" name="username" value="aaaa"/></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><button type="submit">ログインpost</button></td>
+		</tr>
+	</table>
+</form>
+<br>
+<form th:action="@{/postname}" method ="POST">
+	<table>
+		<tr>
+			<td><label for="username">User:</label></td>
+			<td><input type="text" id = "username" name="username" value="aaaa"/></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><button type="submit">ログインget</button></td>
+		</tr>
+	</table>
+</form>
+
+<form th:action="@{/messages}" method ="POST">
+	<table>
+		<tr>
+			<td><label for="username">text:</label></td>
+			<td><input type="text" id = "text" name="text" value="aaaa"/></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><button type="submit">ログインget</button></td>
+		</tr>
+	</table>
+</form>
+</html>

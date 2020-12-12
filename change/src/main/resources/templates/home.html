@@ -1,0 +1,21 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+    th:replace="~{template :: layout(~{::body/content()})}">
+    <head>
+        <meta charset="UTF-8" />
+        <title>home</title>
+    </head>
+    <body>
+    <form th:action="@{/search}" method ="GET">
+    <table>
+    <tr>
+		<td><input type="text" id = "key" name="key"/></td>
+	</tr>
+	</table>
+	<button type="submit">検索</button>
+	</form>
+    <form th:action="@{/home}" method ="POST" > 
+    <button type="submit">homeへ</button>
+    </form>
+	</body>    
+</html>

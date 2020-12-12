@@ -1,0 +1,31 @@
+<!--/* (1) */-->
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout (body)">
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>login</title>
+        	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script>
+	var loadmore = function(){
+	    $.ajax({
+	        type : "GET",
+	        url : "/hogehoge",
+	        dataType : "html",
+	        success : function(data, status, xhr) {
+	            $('#ajaxtest').html(data);
+	    　　  },
+	    });
+	}
+    </script>
+    </head>
+<body>
+
+    <!--/* (3) */-->
+    <div id="header" th:replace="~{header :: header}"></div>
+    <!--/* (4) */-->
+    <div id="body" th:replace="${body}"></div>
+    <div id ="ajaxtest">
+    	<div id ="footer" th:replace="~{footer :: footer}"></div>
+    </div>
+</body>
+</html>

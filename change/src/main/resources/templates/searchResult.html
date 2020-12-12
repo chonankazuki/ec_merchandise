@@ -1,0 +1,28 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{template :: layout(~{::body/content()})}">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Hello Thymeleaf</title>
+
+    </head>
+    <body>
+    
+    <table>
+        <tr th:each="mer : ${merlist}">
+        <td th:text = "${mer.merchandise_name}"></td>
+        <td th:text = "${mer.price}"></td>
+        <td th:text = "${mer.detail_info}"></td>
+	 	<td>
+	        <p th:if = "${mer.stock == 0}">売り切れ</p>
+    	    <form th:action="@{/add-cart}" method ="GET">
+       		<div th:unless = "${mer.stock == 0}">
+        		<input type="hidden" name="merchandise_id" id="merchandise_id" th:value="${mer.merchandise_id}">
+        		<input type="text" name="num" id="num">
+        		<button type="submit">カートに入れる</button>
+        	</div>
+			</form>        
+        </td>
+        </tr>
+    </table>
+    </body>
+</html>
