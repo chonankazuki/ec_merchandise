@@ -26,6 +26,7 @@ import change.domai.model.Cart;
 import change.domai.model.LoginForm;
 import change.domai.model.LoginInfo;
 import change.domai.model.Test;
+import change.domai.service.CartService;
 import change.domai.service.UserService;
 
 
@@ -39,6 +40,8 @@ public class loginController {
 	Cart cart;
 	@Autowired
 	LoginInfo loginInfo;
+	@Autowired
+	CartService cartService;
 
 	//@ModelAttribute("loginform")
 	//public LoginForm setLoginForm() {
@@ -78,6 +81,8 @@ public class loginController {
     		//いろんな情報を取得、セッションアトリビュートのオブジェクトに格納
     		userService.loginProc(loginForm.getId(),loginInfo,cart);
     		model.addAttribute("loginInfo",loginInfo);
+    		cart = cartService.getCart(loginInfo.getSequentialId());
+    		model.addAttribute("cart",cart);
     		return "home";
     	}
     }

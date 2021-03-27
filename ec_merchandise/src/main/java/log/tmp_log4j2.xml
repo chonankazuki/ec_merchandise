@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+
+    <!-- AppenterやLoggerで使用するプロパティを定義する -->
+    <Properties>
+    	<Property name="loglayout">[%d{yyyy-MM-dd HH:mm:ss.SSS}], %-5p, %t, %c, %m%n</Property>
+	</Properties>
+
+    <!-- ログの出力先と出力フォーマットを設定する -->
+    <Appenders>
+    <Console name="STDOUT" target="SYSTEM_OUT">
+        <PatternLayout pattern="${loglayout}"/>
+    </Console>
+</Appenders>
+
+    <!-- パッケージごとにAppenderとログレベルを組み合わせる -->
+<Loggers> 
+    <Root>
+        <AppenderRef ref="STDOUT"/>
+    </Root>
+</Loggers>
+</Configuration>

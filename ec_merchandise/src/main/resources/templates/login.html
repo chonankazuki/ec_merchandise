@@ -1,0 +1,42 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>login</title>
+    </head>
+    
+
+<form th:action="@{/login}" method ="POST" th:object="${loginForm}">
+		<ul th:if="${#fields.hasErrors()}">
+			<li>test</li>
+	        <li th:each="er : ${#fields.detailedErrors()}" th:text="${er.message}"/>
+   	    </ul> 
+	<table>
+
+		<tr>
+		<td>
+		<div th:if="${idcheck_message}">
+			<h1 th:text="${idcheck_message}"></h1>
+		</div>
+		</td>
+
+		</tr>
+		<tr>
+			<td><label for="id">ID:</label></td>
+			<td><input type="text" id = "id" name="id" th:field="*{id}"/></td>
+		</tr>
+		<tr>
+			<td><label for="password">PW:</label></td>
+			<td><input type="text" id = "password" name="password" th:field="*{password}"/></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><button type="submit">ログイン</button></td>
+		</tr>
+	</table>
+</form>
+
+<form th:action="@{/register_form}" method ="GET">
+	<td><button type="submit">新規登録</button></td>
+</form>
+</html>

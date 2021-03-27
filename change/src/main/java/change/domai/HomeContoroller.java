@@ -31,6 +31,7 @@ import change.domai.model.Merchandise;
 import change.domai.model.User;
 import change.domai.model.UserInfo;
 import change.domai.repository.user.UserRepository;
+import change.domai.service.CartService;
 import change.domai.service.SearchService;
 import change.domai.service.UserService;
 
@@ -47,15 +48,19 @@ public class HomeContoroller {
 	LoginInfo loginInfo;
 	@Autowired
 	SearchService searchService;
-	
+	@Autowired
+	CartService cartService;
 	
 	@RequestMapping(value = "/home")
     public String home(Model model) {
 		if(loginInfo == null) {
 			
 		}else {
+			//cart = cartService.getCart(loginInfo.getSequentialId());
 			System.out.println("homeから"+loginInfo.getFirstName());
 			model.addAttribute("loginInfo",loginInfo);
+			model.addAttribute("cart",cart);
+			
 		}
 		return "home";
 	}
@@ -66,6 +71,7 @@ public class HomeContoroller {
 	    List<Merchandise> merlist = searchService.getSearchResult(key);
 	    model.addAttribute("merlist",merlist);
 	    model.addAttribute("loginInfo",loginInfo);
+	    model.addAttribute("cart",cart);
 		return "searchResult";
 	}
 	

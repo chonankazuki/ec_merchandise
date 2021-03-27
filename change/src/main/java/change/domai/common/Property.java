@@ -8,7 +8,7 @@ import java.util.Properties;
 public class Property {
 	public String getProperty(String key) throws IOException {
 		Properties properties = new Properties();
-		String file = "/Users/chounankazuki/Documents/workspace-spring-tool-suite-4-4.6.1.RELEASE/change/src/setting.properties";
+		String file = "/Users/chounankazuki/git/repository/change/src/setting.properties";
 		
 		try {
 			FileInputStream fis = new FileInputStream(file);

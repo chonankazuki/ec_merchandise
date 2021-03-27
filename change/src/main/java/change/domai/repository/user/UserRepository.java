@@ -32,7 +32,7 @@ public class UserRepository {
 		String enddate = ts.MaxDate_jtos();
 
 		String sql = "select count(*) from user "
-				+ "where user_id = ? and app_start_date <= ? and app_end_date > ?";
+				+ "where id = ? and app_start_date <= ? and app_end_date > ?";
 		//String sql1 = "select count(*) from user";
 		//System.out.println("IDカウントは");
 		//System.out.println(jdbcTemplate.queryForObject(sql,Integer.class,id,nowdate,enddate));
@@ -45,12 +45,12 @@ public class UserRepository {
 		String nowdate = ts.CurrentDate_jtos();
 		System.out.println(nowdate);
 		String sql = "select sequential_id from user "
-				+ "where user_id = ? and app_start_date <= ? and app_end_date > ?";
+				+ "where id = ? and app_start_date <= ? and app_end_date > ?";
 		return jdbcTemplate.queryForObject(sql,Integer.class,id,nowdate,nowdate);
 	}
 
 	public int InsertUser(UserInfo userinfo) throws IOException {
-		String sql = "insert into user(user_id, password,app_start_date,app_end_date,register_date) "
+		String sql = "insert into user(id, password,app_start_date,app_end_date,register_date) "
 				+ "values(?,?,?,?,?)";
 		//戻り値は処理件数
 		String nowdate = ts.CurrentDate_jtos();
@@ -73,7 +73,7 @@ public class UserRepository {
 		
 		String nowdate = ts.CurrentDate_jtos();
 		String sql = "select count(*) from user "
-				+ "where user_id = ? and password = ? and app_start_date <= ? and app_end_date > ?";
+				+ "where id = ? and password = ? and app_start_date <= ? and app_end_date > ?";
 		
 		return jdbcTemplate.queryForObject(sql,Integer.class,id,pass,nowdate,nowdate);
 		
