@@ -1,0 +1,34 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>register_confirm</title>
+    </head>
+<form th:action="@{/register}" th:object="${userInfo}" method="post" >
+	<table>
+            <tr>
+            <td class="col-md-9" th:text="*{id}"></td>
+            <td><input type="hidden" th:field="*{id}"/></td>
+            <td class="col-md-9" th:text="*{password}"></td>
+            <td><input type="hidden" th:field="*{password}"/></td>
+            <td class="col-md-9" th:text="*{first_name}"></td>
+            <td><input type="hidden" th:field="*{first_name}"/></td>
+            <td class="col-md-9" th:text="*{last_name}"></td>
+            <td><input type="hidden"th:field="*{last_name}"/></td>
+            <td class="col-md-9" th:text="*{first_name_jp}"></td>
+            <td><input type="hidden" th:field="*{first_name_jp}"/></td>
+            <td class="col-md-9" th:text="*{last_name_jp}"></td>
+            <td><input type="hidden" th:field="*{last_name_jp}"/></td>
+            <td class="col-md-9" th:text="*{addres}"></td>
+            <td><input type="hidden" th:field="*{addres}"/></td>
+            <td class="col-md-9" th:text="*{tel}"></td>
+            <td><input type="hidden" th:field="*{tel}"/></td>
+            <td class="col-md-9" th:text="*{mail}"></td>
+            <td><input type="hidden" th:field="*{mail}"/></td>
+            <td class="col-md-9" th:text="*{birth_date}"></td>
+            <td><input type="hidden" th:field="*{birth_date}"/></td>
+            <td><button type="submit">登録</button></td>
+            </tr>
+	</table>
+</form>
+</html>

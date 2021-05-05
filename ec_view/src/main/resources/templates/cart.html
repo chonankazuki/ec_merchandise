@@ -1,0 +1,57 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>cart</title>    
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+		<script type="text/javascript">
+		var cart_get = "http://localhost:8091/cart/v1.0/get/";
+		$(document).ready(function() {
+			$("#id").text($.cookie("id"));
+            var url = cart_get + $.cookie("id");
+            $.ajax({
+                type : 'get',
+                url : url,
+                dataType:"json", 
+                success : function(data) {
+                    if ('erep' in data){
+                    	alert(data.erep.message);
+                    }else{
+                    	alert(JSON.stringify(data.data.items));
+                    	var size = data.data.items.length;
+                    	$("#cart-num").text(size);
+                    	if(size >0){
+                    		$('#item_list').remove()
+	                    	$("#result_area").append("<div id = \"item_list\"></div>");
+	                    	$.each(data.data.items, function(index, value) {
+	                    		var item = value;
+	                    		$("#item_list").append(
+	                    				"<span id = \"item\">" +　index + ": 商品名 " + item.merchandise_name +" 価格 " +  item.price + "</br>"
+	                    		);
+	                    	    //console.log(index + ': ' + item.price);
+	                    	})
+	                    }
+                    }
+                },
+                error : function(data) {
+                    alert("error");
+                    alert(JSON.stringify(data));
+                    $("#response").html(JSON.stringify(data));
+                }
+            });
+		});
+		</script>
+	</head>
+	<header>
+	</header>
+    <body>
+    	<p id = "cart-num" value = ""></p>点の商品が入っています
+		<div id = "result_area">
+				
+		</div>
+
+	</body> 
+	<footer>
+	</footer>
+</html>

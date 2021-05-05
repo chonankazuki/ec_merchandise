@@ -1,0 +1,61 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>register</title>
+    </head>
+<div th:if="${idcheck_message}">
+<h1 th:text="${idcheck_message}"></h1>
+</div>
+<form th:action="@{/register_confirm}" method="post" th:object="${userInfo}">
+	<table>
+		<ul>
+	        <li th:each="error : ${#fields.detailedErrors()}" th:text="${error.message}"/>
+   	    </ul>   
+		<tr>
+			<td><label for="id">ID</label></td>
+			<td><input type="text" id = "id" name="id" th:field="*{id}"/></td>
+		</tr>
+		<tr>
+			<td><label for="password">PW:</label></td>
+			<td><input type="text" id = "password" name="password" th:field="*{password}"/></td>
+		</tr>
+		<tr>
+			<td><label for="sei">姓:</label></td>
+			<td><input type="text" id = "sei" name="sei" th:field="*{last_name_jp}"/></td>
+		</tr>
+		<tr>
+			<td><label for="sei">名:</label></td>
+			<td><input type="text" id = "mei" name="mei" th:field="*{first_name_jp}"/></td>
+		</tr>
+		<tr>
+			<td><label for="lastname">姓(英字):</label></td>
+			<td><input type="text" id = "lastname" name="lastname" th:field="*{last_name}"/></td>
+		</tr>
+		<tr>
+			<td><label for="firstname">名(英字):</label></td>
+			<td><input type="text" id = "firstname" name="firstname" th:field="*{first_name}"/></td>
+		</tr>
+		<tr>
+			<td><label for="address">住所:</label></td>
+			<td><input type="text" id = "address" name="address" th:field="*{addres}"/></td>
+		</tr>
+		<tr>
+			<td><label for="telnum">電話番号:</label></td>
+			<td><input type="text" id = "telnum" name="telnum" th:field="*{tel}"/></td>
+		</tr>
+		<tr>
+			<td><label for="birthdate">生年月日:</label></td>
+			<td><input type="text" id = "birthdate" name="birthdate" th:field="*{birth_date}"/></td>
+		</tr>
+		<tr>
+			<td><label for="mailaddress">メールアドレス:</label></td>
+			<td><input type="text" id = "mailaddress" name="mailaddress" th:field="*{mail}"/></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><button type="submit">確認</button></td>
+		</tr>
+	</table>
+</form>
+</html>

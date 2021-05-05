@@ -1,0 +1,122 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>home</title>    
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+		<script type="text/javascript">
+			var get_merchandise = "http://localhost:8092/goods/v1.0/get/merchandiseid=";
+			var search_all = "http://localhost:8092/goods/v1.0/search/all?";
+			var cartlist = 'http://localhost:8096/cartlist';
+			var cart_get = "http://localhost:8091/cart/v1.0/get/";
+			$(document).ready(function() {
+				$.cookie("test-hey","xxxx", {path: '/',domain: '127.0.0.1'});
+				$.cookie("test-hey","test");
+				$("#name").text($.cookie("id"));
+	            var url = cart_get + $.cookie("id");
+	            $.ajax({
+	                type : 'get',
+	                url : url,
+	                dataType:"json", 
+	                success : function(data) {
+	                    if ('erep' in data){
+	                    	alert(data.erep.message);
+	                    }else{
+	                    	var size = data.data.items.length;
+	                    	$("#cart-num").text(size);
+	                    }
+	                },
+	                error : function(data) {
+	                    alert("error");
+	                    alert(JSON.stringify(data));
+	                    $("#response").html(JSON.stringify(data));
+	                }
+	            });
+			});
+			$(function(){
+		        $("#response").html("Response Values");
+		        $("#show-cart").click(function(){
+		        	window.location.href = cartlist;
+		        });
+		        
+		        $("#searchbutton").click(function(){
+		            var limit = "50";
+		            var offset = "0";
+		            var url = search_all + "limit=" + limit + "&offset=" + offset;
+		            $.ajax({
+		                type : 'get',
+		                url : url,
+		                //data : JSON.stringify(JSONdata),
+		                //contentType: 'application/json',
+		                dataType:"json", 
+		                success : function(data) {
+		                    if ('erep' in data){
+		                    	alert(data.erep.message);
+		                    }else{
+		                    	//alert("success");
+		                    	//alert(JSON.stringify(data.data));
+		                    	
+		                    	var size = data.data.length;
+			                    $("#result_msg").text("検索結果は"+ size + "件です");
+			                    if(size >0){
+			                    	$('#item_list').remove()
+			                    	$("#result_area").append("<div id = \"item_list\"></div>");
+			                    	$.each(data.data, function(index, value) {
+			                    		var item = value;
+			                    		var link_detail = get_merchandise + item.merchandise_id;
+			                    		link_detail = "<a href="+ link + "><button type=\"button\">詳細</button></a>";
+			                    		
+			                    		$("#item_list").append(
+			                    				"<span id = \"item\">" +　index + ": 商品名 " + item.merchandise_name +" 価格 " +  item.price + " 詳細 " +  item.detail_info + " " + link_detail + "</br>"
+			                    		);
+			                    	    //console.log(index + ': ' + item.price);
+			                    	})
+			                    	
+			                    }
+		                    	$("#result_area").show();
+		                    	
+		                    }
+		                },
+		                error : function(data) {
+		                    alert("error");
+		                    alert(JSON.stringify(data));
+		                    $("#response").html(JSON.stringify(data));
+		                }
+					});
+		        })
+		    })
+		</script>
+    </head>
+    <header>
+    EC home 
+    <div id = name-area>
+    	こんにちは<p id = "name" value = "" href = "http://localhost:8096/userinfo"></p>さん
+    	<button id="show-user" type="button">カートをみる</button>
+    </div>
+    <div id = cart-area>
+    	カートには<p id = "cart-num" value = ""></p>点の商品が入ってます
+    	<button id="show-cart" type="button">カートをみる</button>
+    </div>
+    </header>
+    <body>
+		    bodyですよ
+		    <table>
+			    <tr>
+					<td><input type="text" id="searchkey" size="30"></td>
+					<td><button id="searchbutton" type="button">検索</button></td>
+				</tr>
+			</table>
+			
+			<div id = "result_area" style=”display:none;”>
+				<p id = "result_msg" value = "">
+				
+			</div>
+		    <form th:action="@{/home}" method ="POST" > 
+		    <button type="submit">homeへ</button>
+		    </form>
+	</body> 
+	<footer>
+	
+	</footer>
+</html>
