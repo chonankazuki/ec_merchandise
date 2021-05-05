@@ -13,7 +13,9 @@ public class GetEnvironment {
 	Environment eivironment;
 	
 	public Environment getEnvironment() {
+		System.out.println("test");
 		return eivironment;
 		
 	}
+	
 }
