@@ -3,6 +3,7 @@ package change.domai.service.methods;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import change.domai.common.exception.AlreadyLoginException;
@@ -15,7 +16,12 @@ public class CommonMethods {
 	
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	Environment eivironment;
+	
 	public boolean loginCheck(String id) throws AlreadyLoginException {
+		System.out.println("CMのenvは");
+		System.out.println(eivironment);
 		if(userRepository.loginCheck(id)) {
 			throw new AlreadyLoginException();
 		}else {

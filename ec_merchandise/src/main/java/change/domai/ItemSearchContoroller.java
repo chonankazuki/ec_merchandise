@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,6 +50,7 @@ public class ItemSearchContoroller {
 		}
 	}
 	@GetMapping("/goods/v1.0/search/all")
+	@CrossOrigin(origins = {"http://localhost:8096"})
     public ResponseInterface allSearch_nokey(@RequestParam Map<String, String> params) {
 		Logger logger= LogManager.getLogger();
 		logger.info("This is info level log.");
@@ -78,6 +80,7 @@ public class ItemSearchContoroller {
 	}
 	
 	@GetMapping("/goods/v1.0/search")
+	@CrossOrigin(origins = {"http://localhost:8096"})
     public ResponseInterface Search_key(@RequestParam Map<String, String> params) {
 		int limit;
 		if(params.get("limit") == null) {

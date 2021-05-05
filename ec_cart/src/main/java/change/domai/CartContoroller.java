@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +44,7 @@ public class CartContoroller {
 	ErrorResponse erep;
 	
     @GetMapping("/cart/v1.0/get/{uid}")
+	@CrossOrigin(origins = {"http://localhost:8096"})
 	public ResponseTemplate getCart(@PathVariable("uid") int uid) {
 		cart = cartService.getCart(uid);
 		
@@ -76,6 +77,7 @@ public class CartContoroller {
 		
 	}
     @PostMapping("/cart/v1.0/change/{uid}")
+	@CrossOrigin(origins = {"http://localhost:8096"})
 	public ResponseTemplate changeCart(@PathVariable("uid") int uid,@RequestBody CartChangeReq req) throws IOException, ParseException {
 		
     	int num = req.getNum();
